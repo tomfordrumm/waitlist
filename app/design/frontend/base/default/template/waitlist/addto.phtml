@@ -1,0 +1,21 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: svatoslavzilicev
+ * Date: 02.04.14
+ * Time: 22:28
+ */
+$_product = Mage::registry('current_product');
+$customerId = Mage::getSingleton('customer/session')->getCustomerId();
+if (Mage::getSingleton('customer/session')->isLoggedIn()){
+    $wlUrl = Mage::getUrl('waitlist/index/add').'wl_customer_id/'.$customerId.'/wl_product_id/'.$_product->getId();
+} else {
+    $wlUrl = Mage::getUrl('customer/account/login');
+}
+$isWait = $this->isWait($_product->getId(),$customerId);
+?>
+    <button type="button" class="button" onclick="<?php if ($isWait): ?> return false; <?php else: ?>window.location.href = '<?php echo $wlUrl ?>'; <?php endif?>">
+        <span>
+            <span><?php if ($isWait){echo $this->__('Subscribed');} else {echo $this->__('Add to Waitlist');} ?></span>
+        </span>
+    </button>

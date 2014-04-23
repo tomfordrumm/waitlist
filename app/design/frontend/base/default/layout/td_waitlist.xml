@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<layout>
+    <catalog_product_view>
+        <reference name="product.info">
+            <block name="td_waitlist" type="td_waitlist/waitlist"
+                   template="waitlist/addto.phtml"></block>
+        </reference>
+    </catalog_product_view>
+
+    <customer_account>
+        <!-- Mage_Wishlist -->
+        <reference name="customer_account_navigation">
+            <action method="addLink" translate="label" module="td_waitlist"><name>waitlist</name><path>waitlist/</path><label>My Waitlist</label></action>
+        </reference>
+    </customer_account>
+
+    <waitlist_index_index translate="label">
+        <label>Customer My Account My waitlist</label>
+        <!-- Mage_Wishlist -->
+        <update handle="customer_account" />
+        <reference name="my.account.wrapper">
+            <block type="td_waitlist/waitlist" name="customer.waitlist" template="waitlist/form.phtml">
+                <action method="setTitle" translate="title">
+                    <title>My Waitlist</title>
+                </action>
+                <block type="td_waitlist/items" name="customer.waitlist.items" as="items"
+                       template="waitlist/item/list.phtml">
+                    <block type="td_waitlist/item_column_image" name="customer.waitlist.item.image"
+                           template="waitlist/item/column/image.phtml"/>
+                    <block type="td_waitlist/item_column_comment" name="customer.wishlist.item.info"
+                    template="waitlist/item/column/info.phtml">
+                    <action method="setTitle" translate="title">
+                    <title>Product Details and Comment</title>
+                    </action>
+                    </block>
+                    <block type="td_waitlist/item_column_cart" name="customer.wishlist.item.cart"
+                           template="waitlist/item/column/cart.phtml">
+                        <action method="setTitle" translate="title">
+                            <title>Add to Cart</title>
+                        </action>
+                        <!--<block type="td_waitlist/item_options" name="customer.wishlist.item.options"/>-->
+                    </block>
+                    <block type="td_waitlist/item_column_remove" name="customer.waitlist.item.remove"
+                           template="waitlist/item/column/remove.phtml"/>
+                </block>
+                <!--<block type="core/text_list" name="customer.waitlist.buttons" as="control_buttons">-->
+                    <!--<block type="waitlist/customer_waitlist_button" name="customer.waitlist.button.share"-->
+                           <!--template="waitlist/button/share.phtml"/>-->
+                    <!--<block type="waitlist/customer_waitlist_button" name="customer.waitlist.button.toCart"-->
+                           <!--template="waitlist/button/tocart.phtml"/>-->
+                    <!--<block type="waitlist/customer_waitlist_button" name="customer.waitlist.button.update"-->
+                           <!--template="waitlist/button/update.phtml"/>-->
+                <!--</block>-->
+            </block>
+        </reference>
+    </waitlist_index_index>
+</layout>
